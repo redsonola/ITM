@@ -328,11 +328,12 @@ public:
         {
             
             //determine how long the beat will be randomly
-            float howManyBeatsMax = ((static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) *
-                       (beatCountPerMax-beatCountPerMin)) + beatCountPerMin;
+//            float howManyBeatsMax = ((static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) *
+//                       (beatCountPerMax-beatCountPerMin)) + beatCountPerMin;
             
 //            std::cout << "howManyBeatsMax:" << howManyBeatsMax <<" bvs:" << bvs << " count:" << stepCount << std::endl;
             
+            float howManyBeatsMax = 0.5; //half a beat max. testing. 6/30/2021
             getNextNotes(howManyBeatsMax, bvs);
             
             stepCount++;

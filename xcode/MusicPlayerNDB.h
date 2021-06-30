@@ -347,6 +347,9 @@ public:
     
         //shouldPlayNewFile() &&
         if(fo->isStepping() ) //wait for a foot onset to start
+            //ok to prevent going through melodies too fast and dropping notes, this should check whether notes have already been
+            //sent or are in the buffer... this should take notes from the buffer and adjust to current time instead of
+            //adding new notes. -- TODO: added Jun. 30 2021 NOTE: need to find the dropped notes......
         {
             if(curMelodyFile->atEnd())
             {
