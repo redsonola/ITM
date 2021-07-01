@@ -17,7 +17,7 @@ namespace InteractiveTango
 {
     
     //files for instruments
-#define INSTRUMENTS_FILE "/Users/courtney/Documents/Interactive Tango Milonga/NDB/Instruments.csv"
+#define INSTRUMENTS_FILE "/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/Instruments.csv"
 
 
 class Instrument

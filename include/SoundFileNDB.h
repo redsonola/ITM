@@ -515,6 +515,7 @@ public:
                         double tickToAdd =newNotes[i].tick;
                         newNotes[i].tick += startTick;
                         startTick += tickToAdd;
+                        newNotes[i].setSection( MidiMessage::WhichSection::MELODY );
                     
                         buffer.push_back(newNotes[i]);
                         secondsAdded.push_back(seconds);
@@ -584,15 +585,49 @@ public:
             return buf;
         }
         
+        //ok looks at it's buffer. if there is an upcoming melody note, then it has a note there ready to play
+        //for a step that has already been sent there.
+        //this will be called by the melody section. so the melody section will have a pointer now to this object/class.
+        //it is called where there is a new step. so that melodies don't get out of order & don't go by too quickly
+        bool readyToPlay()
+        {
+            bool ready = false;
+            int i = 0;
+            
+            while( i<buffer.size() && !ready)
+            {
+                ready = buffer[i].getSection() == MidiMessage::WhichSection::MELODY;
+                i++;
+            }
+            if( ready )
+            {
+                buffer[i-1].tick = 0; //ok, now this will play next update
+            }
+            return ready;
+        }
+        
         void update(float seconds)
         {
             int i = 0;
+            bool mel = false;
+            bool first = true;
             
-            while(i<buffer.size() && i >= 0)
+            while( i<buffer.size() )
             {
                 if( (((double)buffer[i].tick / (double)buffer[i].tpb)) * ((60.0)/(double)beattimer->getBPM()) <= seconds - secondsAdded[i] ) //TODO synch with beats
                 {
                     midiOut->send(buffer[i], buffer[i].channel); //TODO: which midi-channel?
+                    if( buffer[i].getSection() == MidiMessage::WhichSection::MELODY ) //debug
+                    {
+                    
+                        if(first)
+                        {
+                            std::cout << "------ START PLAYED NOTES --------" << std::endl;
+                            mel = true;
+                        }
+                        std::cout << buffer[i].toStr();
+
+                    }
                     try {
                         secondsAdded.erase(secondsAdded.begin() + i);
                         buffer.erase(buffer.begin() + i);
@@ -604,9 +639,16 @@ public:
                     }
                 }
                 else
-                {    i++;
+                {
+                    i++;
                 }
             }
+            
+            if(mel)
+            {
+                std::cout << "------ END PLAYED NOTES --------" << std::endl;
+            }
+
             
         }
 
@@ -648,7 +690,7 @@ public:
         std::string dbFile;
         std::vector<Song *> songs;
     public:
-        SongLoader(std::string db = "/Users/courtney/Documents/Interactive Tango Milonga/New Database Plan for Social System/ITMSongs.csv")
+        SongLoader(std::string db ="/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/ITMSongs.csv")
         {
             dbFile = db;
         };

@@ -43,9 +43,11 @@ namespace InteractiveTango {
     public:
         enum MessageTypes { NOTE=0, CONTROL=1 };
         enum NoteDuration { ALL_LEGATO, N4, N8, N16, N32, NONE };
+        enum WhichSection { MELODY=0, ACCOMP=1 };
         
         int channel; //which midi channel
         int which; //0 is note on, 1 is the control message -- hack - but ended up not using pointers
+        int whichSection;
     };
     
     class MidiControlMessage : public MidiMessage
@@ -56,7 +58,7 @@ namespace InteractiveTango {
             which = MidiMessage::MessageTypes::CONTROL;
         }
         int control;
-        int value; //0-127 of course
+        int value; //0-127 of cours
     };
 
     class MidiNote : public MidiMessage
@@ -73,6 +75,7 @@ namespace InteractiveTango {
             voice = 0;
             which = MidiMessage::MessageTypes::NOTE;
             noteDuration = MidiMessage::NoteDuration::NONE; //must be filled by the ITM
+            whichSection = MidiMessage::WhichSection::ACCOMP;
         }
         
         MidiNote(MidiNote *note)
@@ -93,6 +96,16 @@ namespace InteractiveTango {
         double tpb; //ticks per beat
         int oneOftheLastMelodyNotes;
         int voice; //since many instrument voices will be sent to one channel, will need to keep track of voices separately from channel.
+        
+        void setSection(MidiMessage::WhichSection section)
+        {
+            whichSection = section;
+        }
+        
+        int getSection()
+        {
+            return whichSection;
+        }
         
         bool operator==(MidiNote note)
         {

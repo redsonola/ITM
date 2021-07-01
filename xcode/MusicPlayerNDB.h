@@ -198,6 +198,7 @@ protected:
     int midiCh;
     bool phraseStart;
     Instrument *curInstrument;
+    PlayBufferedNotes *playNotes; //need to reference to see what is already in the buffer. fastest way to make this mod.
 
 //TODO: why am I looping through the mapping objects like an idiot? should just name them in an enum. Its been 5 years and they
 //haven't changed. FIX WHEN TIME. That was some overengineered bs.
@@ -212,6 +213,7 @@ public:
         timesToRepeatSection();
         instrumentsAvailable = ins;
         curInstrument = NULL;
+        playNotes = NULL;
         
         if(! instrumentsAvailable)
             return;
@@ -222,6 +224,12 @@ public:
 //        }
 //            setMidiChannels(allMidiChannels);
     };
+    
+    //ok this does have access to this object via the noteoffs but I don't think that ever worked.
+    void setPlayNotes(PlayBufferedNotes *pNotes)
+    {
+        playNotes = pNotes;
+    }
     
     int getBVSMax()
     {
@@ -333,10 +341,15 @@ public:
     
     virtual void update(boost::shared_ptr<std::vector<int>> hsprofile, float seconds = 0)
     {
+        if(!playNotes)
+        {
+            std::cout << "PlayBufferedFile not defined! Must set file\n";
+            return;
+        }
+        
         secondsPlayed = beatTimer->getTimeInSeconds() - secondsStarted; //how long in seconds has the file been playing?
         curSeconds = seconds;
         noteBuffer.clear();
-
     
         if( beatTimer->isOnBeat(0.0, seconds) ) //exactly on beat
         {
@@ -347,11 +360,12 @@ public:
     
         //shouldPlayNewFile() &&
         if(fo->isStepping() ) //wait for a foot onset to start
-            //ok to prevent going through melodies too fast and dropping notes, this should check whether notes have already been
-            //sent or are in the buffer... this should take notes from the buffer and adjust to current time instead of
-            //adding new notes. -- TODO: added Jun. 30 2021 NOTE: need to find the dropped notes......
         {
-            if(curMelodyFile->atEnd())
+            if( playNotes->readyToPlay() ) 
+            {
+                return; //nothing to do, note(s) already qeued up
+            }
+            else if(curMelodyFile->atEnd())
             {
 //                std::cout << "changing section..\n";
                 changeSection(seconds);
@@ -458,6 +472,19 @@ public:
     virtual std::vector<MidiNote> getNoteBuffer()
     {
         return noteBuffer;
+    }
+    
+    virtual void printNoteBuffer()
+    {
+        if( noteBuffer.size() <= 0 ) return;
+        
+        std::cout << "-- Notes in Melody Buffer --" << std::endl;
+        for(int i = 0; i<noteBuffer.size(); i++)
+        {
+            std::cout << noteBuffer[i].toStr() ;
+        }
+        std::cout << "-- END Melody Buffer --" << std::endl;
+
     }
 
     virtual bool shouldPlayNewFile() //new notes,  now, really -- TODO: change this name
@@ -775,7 +802,10 @@ public:
         {
             main_melody = melody;
             if(main_melody != NULL)
+            {
                 ((MainMelodySectionNDB *)main_melody)->setPlayBufferedNotes(playMidiNotes);
+                ((MainMelodySectionNDB *)main_melody)->setPlayNotes(playMidiNotes); //ok need to refactor obv. wtf mate. see above.
+            }
         };
         
         virtual void update(float seconds = 0)
@@ -787,10 +817,11 @@ public:
             
             main_melody->update(hsprofile, seconds);
             playMidiNotes->addNotes(((MainMelodySectionNDB *)main_melody)->getNoteBuffer(), seconds);
+            ((MainMelodySectionNDB *)main_melody)->printNoteBuffer();
 //            ((MainMelodySectionNDB *)main_melody)->updatePvCNoteOffs(seconds); //currently disabled
             
             
-            int sizebefore = playMidiNotes->size() ;
+//            int sizebefore = playMidiNotes->size() ;
             accompaniments[0]->update(hsprofile, seconds);
             playMidiNotes->addNotes(((AccompanimentSectionNDB *)accompaniments[0])->getNoteBuffer(), seconds,
                                     ((AccompanimentSectionNDB *)accompaniments[0])->getCurTicks());

@@ -1,0 +1,7 @@
+InstrumentID,InstrumentName,MelodyTrackID,stacc./legato, Melody Ch., Accomp. Ch., range low, range high, notes
+1,Bandoneon,220,0,2,8,36,95
+3,Piano,206,1,1,7,21,108
+4,violin,4307,0,5,11,47,120, now actually a violin 
+5,cello,1703,0,3,9,31,73
+6,guitar,4305,1,4,10,37,83
+7,harmonica,4309,0,6,12,47,108
