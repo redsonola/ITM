@@ -571,7 +571,7 @@ class TangoInstrumentsLoader : public InstrumentLoader
                 {
                     first = false;
                 }
-                else
+                else if(tokens.size() != 0)
                 {
                     int instrID = std::atoi(tokens[0].c_str());
                     std::string n = tokens[1];

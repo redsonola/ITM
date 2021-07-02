@@ -361,7 +361,7 @@ public:
         //shouldPlayNewFile() &&
         if(fo->isStepping() ) //wait for a foot onset to start
         {
-            if( playNotes->readyToPlay() ) 
+            if( playNotes->readyToPlay(seconds) )
             {
                 return; //nothing to do, note(s) already qeued up
             }

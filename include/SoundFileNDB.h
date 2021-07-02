@@ -589,7 +589,7 @@ public:
         //for a step that has already been sent there.
         //this will be called by the melody section. so the melody section will have a pointer now to this object/class.
         //it is called where there is a new step. so that melodies don't get out of order & don't go by too quickly
-        bool readyToPlay()
+        bool readyToPlay(float seconds)
         {
             bool ready = false;
             int i = 0;
@@ -601,7 +601,23 @@ public:
             }
             if( ready )
             {
-                buffer[i-1].tick = 0; //ok, now this will play next update
+                
+                //update the rest of the note ticks
+                i--;
+                if( buffer[i].tick != 0 )
+                {
+                    double beatsPassed = (seconds - secondsAdded[i]) * ((double)beattimer->getBPM()/60.0) ;
+                    double ticksPassed = beatsPassed * buffer[i].tpb;
+                    double howManyTicksPassedToAdjust = buffer[i].tick - ticksPassed;
+                    for(int j=i+1; j<buffer.size(); j++)
+                    {
+                        if( buffer[j].getSection() == MidiMessage::WhichSection::MELODY )
+                        {
+                            buffer[j].tick -= howManyTicksPassedToAdjust;
+                        }
+                    }
+                    buffer[i].tick = 0; //ok, now this will play next update
+                }
             }
             return ready;
         }

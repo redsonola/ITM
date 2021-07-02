@@ -6,7 +6,7 @@ SongID,SectionID,SongSection,MidiFile,BSMax,BSAccompMax,AccompGeneric,WrittenOut
 2,5,2,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/PorUnaCabezaSection2Melody1.mid,3,5,1,4,G,M,127,0.5
 3,6,1,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/LaCumparsitaSection1Melody1.mid,4,5,1,4,G,m,127,0.5
 3,7,2,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/LaCumparsitaSection2Melody1.mid,4,5,1,4,G,m,127,0.5
-4,8,1,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection1.mid,4,3,1,4,B,m,127,0.5
-4,9,2,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection2.mid,4,3,1,4,B,m,127,0.5
-4,10,3,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection2.mid,4,3,1,4,B,m,127,0.5
-4,11,4,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection3.mid,4,3,1,4,B,m,127,0.5
+4,8,1,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection1.mid,4,3,1,5,B,m,127,0.5
+4,9,2,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection2.mid,4,3,1,5,B,m,127,0.5
+4,10,3,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection2.mid,4,3,1,5,B,m,127,0.5
+4,11,4,/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaNewDB/ITM_Database/NDB/ElChocloSection3.mid,4,3,1,5,B,m,127,0.5
