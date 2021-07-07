@@ -636,11 +636,11 @@ public:
                     if( buffer[i].getSection() == MidiMessage::WhichSection::MELODY ) //debug
                     {
                     
-                        if(first)
-                        {
-                            std::cout << "------ START PLAYED NOTES --------" << std::endl;
-                            mel = true;
-                        }
+//                        if(first)
+//                        {
+//                            std::cout << "------ START PLAYED NOTES --------" << std::endl;
+//                            mel = true;
+//                        }
                         std::cout << buffer[i].toStr();
 
                     }
@@ -660,10 +660,10 @@ public:
                 }
             }
             
-            if(mel)
-            {
-                std::cout << "------ END PLAYED NOTES --------" << std::endl;
-            }
+//            if(mel)
+//            {
+//                std::cout << "------ END PLAYED NOTES --------" << std::endl;
+//            }
 
             
         }
