@@ -169,19 +169,19 @@ public:
 //        if( !_name.compare("Follower Busy Sparse") )
 //            std::cout << "Follower Busy Sparse - in find mood" << "," << m << "\n";
         
-        if( !_name.compare("Melody Busy Sparse") )
-        {
-            std::cout << "Busy/Sparse min: " << minMood << "  max: " << maxMood << std::endl;
+//        if( !_name.compare("Melody Busy Sparse") )
+//        {
+//            std::cout << "Busy/Sparse min: " << minMood << "  max: " << maxMood << std::endl;
 
 //            std::cout << getName() << "," << curMood << "," << "  , Values: ";
 //            for( int i=0; i<mData.size(); i++ )
 //                std::cout  <<  ((MotionAnalysisEvent *) mData[i] )->scaledValuePolyFit() << ","  ;
 //            std::cout << std::endl;
 
-            for( int i=0; i<mData.size(); i++ )
-                std::cout  << ((MotionAnalysisEvent *) mData[i] )->asFloat() << ","  ;
-            std::cout << std::endl;
-        }
+//            for( int i=0; i<mData.size(); i++ )
+//                std::cout  << ((MotionAnalysisEvent *) mData[i] )->asFloat() << ","  ;
+//            std::cout << std::endl;
+//        }
 
         return std::min(m, maxMood);
     };

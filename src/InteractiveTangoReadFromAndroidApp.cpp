@@ -1859,7 +1859,7 @@ void InteractiveTangoReadFromAndroidApp::updateSignalTree(float seconds, float p
         //ok now send OSC messages for rest of signal tree
         for(int i=0; i<mUGENs.size(); i++){
             sendOSCMessages(mUGENs[i]->getOSC(), seconds);
-            sendMidiMessages(mUGENs[i]->getMIDI());
+//            sendMidiMessages(mUGENs[i]->getMIDI()); //don't send just for the sensors right now 7/13/2021
 
         }
         

@@ -998,9 +998,6 @@ public:
         virtual std::vector<MidiMessage *> getMIDI(){
             std::vector<MidiMessage *>  msgs;
             
-            
-            
-            
             if( dmd->shouldSend() && midiMappingMode >= -1 )
             {
                 std::vector<float> energyVals = energy->valuesForOSC();
@@ -1014,16 +1011,13 @@ public:
                 
                     for(int i=0; i<energyVals.size()/3; i++)
                     {
-                        float val = -1;
-
                         for(int j=0; j<midiChannel.size(); j++)
                         {
                             MidiControlMessage *msg = outputSignalPowerMessage(i*3, mControl, energyVals);
                             msgs.push_back(msg);
                         }
                         mControl++;
-//                    std::cout << "control: " << i << "," << val << std::endl;
-
+//                    std::cout << "control: " << i << "," << val << std::endl
                     }
                 } // std::cout << "----midiControl: end: " << mControl << std::endl;
                 else
@@ -1070,7 +1064,7 @@ public:
             msg->channel = midiChannel[0];
 
             float v = (float(vals[i]) * float(vals[i]) + float(vals[i+1]) * float(vals[i+1]) + float(vals[i+2]) * float(vals[i+2]))
-            * float(MIDI_MAX_VAL)* 1000.0f;
+            * float(MIDI_MAX_VAL)* 500.0f; //1000.0f;
             msg->value = v;
             
 //            std::cout << "vals: " << v << std::endl;

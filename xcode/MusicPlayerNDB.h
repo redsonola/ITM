@@ -817,7 +817,7 @@ public:
             
             main_melody->update(hsprofile, seconds);
             playMidiNotes->addNotes(((MainMelodySectionNDB *)main_melody)->getNoteBuffer(), seconds);
-            ((MainMelodySectionNDB *)main_melody)->printNoteBuffer();
+//            ((MainMelodySectionNDB *)main_melody)->printNoteBuffer();
 //            ((MainMelodySectionNDB *)main_melody)->updatePvCNoteOffs(seconds); //currently disabled
             
             

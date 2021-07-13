@@ -8,18 +8,6 @@
 #ifndef DancersNDB_h
 #define DancersNDB_h
 
-//TODO:
-//1. create melody files
-//2. create melody loader
-//then  test  //done
-
-//3. create accompaniment classes + files + loader
-//4. add to DanceFloorNDB
-//then testp
-//5. create ornament stuff
-//then test
-//6. add a whole bunch of new songs, woooooo  
-
 namespace InteractiveTango
 {
     class DanceFloorNDB : public DanceFloor {
@@ -74,6 +62,7 @@ namespace InteractiveTango
         
         //TODO: implement all the send signals for 2 couples
         
+
         void setMidiMapping(int i)
         {
             const int TURN_OFF_MIDI = -2;
@@ -89,29 +78,91 @@ namespace InteractiveTango
             }
             else
             {
+                //                if( i < followerRightFootControlStart )
+                //                {
+                //                    couples[0]->getSendSignalsFollower()[0]->setMidiMappingMode(i);
+                //                }
+                //                else if( i < leaderLeftFootControlStart )
+                //                {
+                //                    couples[0]->getSendSignalsFollower()[1]->setMidiMappingMode(i);
+                //                }
+                //                else if( i < leaderRightFootControlStart )
+                //                {
+                //                    couples[0]->getSendSignalsLeader()[0]->setMidiMappingMode(i);
+                //                }
+                //                else
+                //                {
+                //                    couples[0]->getSendSignalsLeader()[1]->setMidiMappingMode(i);
+                //                }
+                
                 couples[0]->getSendSignalsFollower()[0]->setMidiMappingMode(TURN_OFF_MIDI);
                 couples[0]->getSendSignalsFollower()[1]->setMidiMappingMode(TURN_OFF_MIDI);
                 couples[0]->getSendSignalsLeader()[0]->setMidiMappingMode(TURN_OFF_MIDI);
                 couples[0]->getSendSignalsLeader()[1]->setMidiMappingMode(TURN_OFF_MIDI);
                 
-                if( i < followerRightFootControlStart )
+                const int FOLLOWER = 1;
+                const int LEADER = 2;
+                if( i == FOLLOWER ) //follower
                 {
-                    couples[0]->getSendSignalsFollower()[0]->setMidiMappingMode(i);
+                    couples[0]->getSendSignalsFollower()[0]->setMidiMappingMode(1);
+                    couples[0]->getSendSignalsFollower()[1]->setMidiMappingMode(2);
                 }
-                else if( i < leaderLeftFootControlStart )
+                else if ( i == LEADER )
                 {
-                    couples[0]->getSendSignalsFollower()[1]->setMidiMappingMode(i);
-                }
-                else if( i < leaderRightFootControlStart )
-                {
-                    couples[0]->getSendSignalsLeader()[0]->setMidiMappingMode(i);
-                }
-                else
-                {
-                    couples[0]->getSendSignalsLeader()[1]->setMidiMappingMode(i);
+                    couples[0]->getSendSignalsLeader()[0]->setMidiMappingMode(3);
+                    couples[0]->getSendSignalsLeader()[1]->setMidiMappingMode(4);
+                
                 }
             }
+        
+        }
+
+        //just send max of each foot. -- don't want separate controls for different feet at the moment.
+        MidiControlMessage *maxMIDIControl(MidiControlMessage *L, MidiControlMessage *R, int newChNumber)
+        {
+            MidiControlMessage *msg = L;
+            int val = std::max( L->value, R->value );
+            msg->value = val;
+            msg->channel = newChNumber;
+            return msg;
+        }
+        
+        std::vector<MidiMessage *> maxMIDIControlVector(std::vector<MidiMessage *> L, std::vector<MidiMessage *> R, int newChNumber)
+        {
+            std::vector<MidiMessage *>  msgs;
+            int j = R.size()-1;
+            for( int i=L.size()-1; i>=0 && j>-1; i-- )
+            {
+                msgs.push_back( maxMIDIControl((MidiControlMessage *) L[i], (MidiControlMessage *) R[j], newChNumber ) );
+                j--;
+            }
+            return msgs;
+        }
+        
+        //ok just for one couple for now -- TODO: add more couples.
+        //This just averages out the 2 feet.
+        virtual std::vector<MidiMessage *> getMIDI(){
             
+            std::vector<MidiMessage *>  msgs;
+            //channel 1 is follower, channel 2 is leader
+            
+            if(couples.size() <= 0)
+                return msgs;
+                        
+            std::vector<MidiMessage *>  fmsgs =  maxMIDIControlVector(couples[0]->getSendSignalsFollower()[0]->getMIDI(), couples[0]->getSendSignalsFollower()[1]->getMIDI(), 1 );
+            std::vector<MidiMessage *>  lmsgs =   maxMIDIControlVector(couples[0]->getSendSignalsLeader()[0]->getMIDI(), couples[0]->getSendSignalsLeader()[1]->getMIDI(), 2 );
+            
+            for(int i=0; i<fmsgs.size(); i++)
+            {
+                msgs.push_back(fmsgs[i]);
+            }
+            
+            for(int i=0; i<lmsgs.size(); i++)
+            {
+                msgs.push_back(lmsgs[i]);
+            }
+            
+            return msgs;
         }
         
         void leaderFakeStep()
