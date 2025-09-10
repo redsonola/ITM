@@ -14,8 +14,8 @@
 #define SHIMMER_DATA_OSC_ADDR "/shimmerdata"
 #define BUS_OSC_ADDR "/c_set"
 #define SHIMMER_NUM_ARGS 19
-#define SHIMMER_PORT 57121
-#define SC_LANG_PORT 57120
+#define SHIMMER_PORT 57121 //not used
+#define SC_LANG_PORT 57120 //not used
 #define G_FORCE 9.80665
 #define FRAMERATE 51
 
@@ -29,6 +29,8 @@
 #define WEK_ADDR "192.168.1.5"
 #define OSC_LISTENING_PORT 3000
 #define PHOTO_TIMING_PORT 3001
+#define BRENT_LISTENING_PORT 3002
+
 
 #define REMOTELAPTOP_PORT 3333
 #define REMOTELAPTOP_ADDRESS "192.168.1.88"
@@ -60,6 +62,17 @@
 //OSC MESSAGES, receiving from android & sending to ableton.
 #define INTERACTIVE_TANGO_PREFIX "/InteractiveTango"
 #define OSC_ANDROID_SENSOR_DATA "/InteractiveTango/AndroidData"
+#define OSC_M5STICK_DATA "/InteractiveTango/M5Stick"
+
+#define DATA_OSC_IPHONE_DATA "/data/motion"
+#define DATA_OSC_IPHONE_DATA_ACCELX "/data/motion/accelerometer/x"
+#define DATA_OSC_IPHONE_DATA_ACCELY "/data/motion/accelerometer/y"
+#define DATA_OSC_IPHONE_DATA_ACCELZ "/data/motion/accelerometer/z"
+#define DATA_OSC_IPHONE_DATA_GYRX "/data/motion/gyroscope/x"
+#define DATA_OSC_IPHONE_DATA_GYRY "/data/motion/gyroscope/y"
+#define DATA_OSC_IPHONE_DATA_GYRZ "/data/motion/gyroscope/z"
+
+
 #define OSC_SHIMMERDATA "/InteractiveTango/ShimmerData"
 #define OSC_SHIMMERDATA_TO_SC "/InteractiveTango/ShimmerData/SC"
 #define SHIMMER_DATA_QUAT "/InteractiveTango/ShimmerData"

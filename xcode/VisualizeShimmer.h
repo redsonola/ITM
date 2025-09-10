@@ -20,7 +20,9 @@ private:
 public: 
 	VisualizeShimmer();
 	virtual void update(std::vector<ShimmerData *> data);
-	virtual void draw(); 
+    virtual float updateValue(float value, int which);
+
+	virtual void draw();
 	inline void setColor(ci::ColorA c){ color = c; }; 
 	void setPort(std::string p)
 	{ 
@@ -42,29 +44,68 @@ VisualizeShimmer::VisualizeShimmer()
 	color = ci::ColorA(0, 1, 0, 1); //random initial color, not really random, green.
 	transVector = ci::vec3(0,0,0);
 }
+float VisualizeShimmer::updateValue(float value, int which)
+{
+    if( value != NO_DATA )
+    {
+        value = value / G_FORCE;
+        value = value * 6 - 3;
+        value = value + transVector[which];
+    }
+    return value;
+}
 void VisualizeShimmer::update(std::vector<ShimmerData *> data)
 {
-	vData.clear();
-	for (int i = 0; i < data.size(); i++)
-	{
-		ci::vec3 pos = data[i]->getAccelData();
-        if( pos.x != NO_DATA ) //for handling android data
+    //init
+    ci::vec3 lastPos;
+    for(int i=0; i<3; i++)
+        lastPos[i] = NO_DATA;
+    if(vData.size() > 0)
+        lastPos = vData[vData.size()-1];
+    vData.clear();
+	
+    //add new data -- fixed to work with the DataOSC from iphone, which sends x, y, z in all separate messages...
+    for (int i = 0; i < data.size(); i++)
+    {
+        ci::vec3 pos = data[i]->getAccelData();
+        for( int j =0; j< 3;j++)
         {
-            pos.x = pos.x / G_FORCE;
-            pos.y = pos.y / G_FORCE;
-            pos.z = pos.z / G_FORCE;
-
-            
-            //TODO -- fix constants??
-            pos.x = pos.x * 6 - 3;
-            pos.y = pos.y * 6 - 3;
-            pos.z = pos.z * 6 - 3;
-            
-            pos = pos + transVector;
-            vData.push_back(pos);
+            if( pos[j] != NO_DATA )
+                pos[j] = updateValue(pos[j], j);
+            else
+            {
+                if(i == 0)
+                {
+                    pos[j] = lastPos[j]; //it will equal the previous, even if NO_DATA
+                }
+                else if( i > 0 && vData.size() > 0 )
+                {
+                    pos[j] = vData[vData.size()-1][j];
+                }
+            }
         }
+        vData.push_back(pos);
+
+//        if( pos.x != NO_DATA ) //for handling android data
+//        {
+//            pos.x = pos.x / G_FORCE;
+//            pos.y = pos.y / G_FORCE;
+//            pos.z = pos.z / G_FORCE;
+//
+//            
+//            //TODO -- fix constants??
+//            pos.x = pos.x * 6 - 3;
+//            pos.y = pos.y * 6 - 3;
+//            pos.z = pos.z * 6 - 3;
+//            
+//            pos = pos + transVector;
+//            vData.push_back(pos);
+//        }
 	}
 }
+
+
+
 void VisualizeShimmer::draw()
 {
 	ci::gl::color(color);

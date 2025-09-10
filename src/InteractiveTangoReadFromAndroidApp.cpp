@@ -425,6 +425,7 @@ public:
     
 private:
     osc::ReceiverUdp mListener;
+    osc::ReceiverUdp mBrentListener;
     SensorData * getSensor(string deviceID, int which);
 	void drawGrid(float size=100.0f, float step=2.0f);
     void sendPhotoSync(float seconds);
@@ -443,6 +444,8 @@ private:
     void addStepDetection(int id1, int id2, std::string port1, std::string port2);
     virtual void prepareSettings(Settings *settings);
     void handleOSC(osc::Message message, float seconds);
+    void handleBrentOSC(osc::Message message, float seconds);
+    //void handleDataOSCIPhone(osc::Message message, float seconds);
     void saveAllSensors();
     void updateSignalTree(float seconds, float pastSeconds);
     std::vector<ci::osc::Message> collectMessagesforDifferentPorts(std::string addr, std::vector<ci::osc::Message> *msgs, std::vector<ci::osc::Message> nmsgs);
@@ -566,11 +569,11 @@ private:
     bool    receivedBeat;
     
     //add dancers automatically
-    bool addLiveDancers;
+    bool addLiveDancers; //note -- this can set to false for testing I assume.
     void addLivePareja(std::map<int, int> &l, std::map<int, int> &f, int lID, int fID);
     void addLiveDancer(SensorData *sensor, int sid);
     std::map<int, int> leader, follower, leader2, follower2;
-    
+     
     bool shouldSendOSC;
     
     //steps controlled by a keyboard instead of a dancer
@@ -597,7 +600,8 @@ ornamentSender(getLocalPort(), SELF_IPADDR, ORNAMENT_PORT ),
 circlingSender(getLocalPort(), SELF_IPADDR, CIRCLING_PORT ), //send circling steps
 longStepSender(getLocalPort(), SELF_IPADDR, LONGSTEP_PORT ), //send long step info (not yet mapped)
 backSender(getLocalPort(), SELF_IPADDR, BACK_PORT),
-mListener(OSC_LISTENING_PORT)
+mListener(OSC_LISTENING_PORT),
+mBrentListener(BRENT_LISTENING_PORT)
 //remoteLaptopSender(getLocalPort(), REMOTELAPTOP_ADDRESS, REMOTELAPTOP_PORT)
 {
     localPortCount=0;
@@ -614,6 +618,7 @@ InteractiveTangoReadFromAndroidApp::~InteractiveTangoReadFromAndroidApp()
     longStepSender.close();
     backSender.close();
     mListener.close();
+    mBrentListener.close();
 //    remoteLaptopSender.close();
 }
 
@@ -1130,8 +1135,15 @@ void InteractiveTangoReadFromAndroidApp::setup()
     //listening to sensor data
 //    mListener.setup( OSC_LISTENING_PORT );
     std::string oscMessages[] = {ABLETON_SYNC, ABLETON_BPM, ABLETON_BUSYSPARSE_SCALE, WII_PREFIX, WEKINATOR_OUTPUT_PREFIX, OSC_SHIMMERDATA,
-        OSC_ANDROID_SENSOR_DATA, ANDROID_ORIENTATION, ANDROID_STEPDETECTION, ABLETON_STACCATO_LEGATO_INSTR_SCALE};
-    int OSC_MSG_NUMBER = 10;
+        OSC_ANDROID_SENSOR_DATA, ANDROID_ORIENTATION, ANDROID_STEPDETECTION, ABLETON_STACCATO_LEGATO_INSTR_SCALE, OSC_M5STICK_DATA,
+        DATA_OSC_IPHONE_DATA_ACCELX,
+        DATA_OSC_IPHONE_DATA_ACCELY,
+        DATA_OSC_IPHONE_DATA_ACCELZ,
+        DATA_OSC_IPHONE_DATA_GYRX,
+        DATA_OSC_IPHONE_DATA_GYRY,
+        DATA_OSC_IPHONE_DATA_GYRZ
+    };
+    int OSC_MSG_NUMBER = 18;
     for (int i=0; i<OSC_MSG_NUMBER; i++)
     {
         std::stringstream addr;
@@ -1142,12 +1154,38 @@ void InteractiveTangoReadFromAndroidApp::setup()
         });
     }
     
+    std::string oscMessagesBrent[] = {DATA_OSC_IPHONE_DATA_ACCELX,
+        DATA_OSC_IPHONE_DATA_ACCELY,
+        DATA_OSC_IPHONE_DATA_ACCELZ,
+        DATA_OSC_IPHONE_DATA_GYRX,
+        DATA_OSC_IPHONE_DATA_GYRY,
+        DATA_OSC_IPHONE_DATA_GYRZ};
+    
+    int OSC_BRENT_MSG_NUMBER = 6;
+    for (int i=0; i<OSC_BRENT_MSG_NUMBER; i++)
+    {
+        std::stringstream addr;
+        mBrentListener.setListener( oscMessagesBrent[i], [&]( const osc::Message &msg ){
+//            saveOSC->add(msg, getElapsedSeconds()); //add this line to save the OSC //this is handleOSC
+            setpriority(PRIO_PROCESS, 0, 1);
+            handleBrentOSC(msg, getElapsedSeconds());
+        });
+    }
     
     
     
     try {
         // Bind the receiver to the endpoint. This function may throw.
         mListener.bind();
+    }
+    catch( const osc::Exception &ex ) {
+        CI_LOG_E( "Error binding: " << ex.what() << " val: " << ex.value() );
+        quit();
+    }
+    
+    try {
+        // Bind the receiver to the endpoint. This function may throw.
+        mBrentListener.bind();
     }
     catch( const osc::Exception &ex ) {
         CI_LOG_E( "Error binding: " << ex.what() << " val: " << ex.value() );
@@ -1161,6 +1199,16 @@ void InteractiveTangoReadFromAndroidApp::setup()
     // function takes an error handler for the underlying socket. Any errors that would
     // call this function are because of problems with the socket or with the remote message.
     mListener.listen(
+                     []( asio::error_code error, protocol::endpoint endpoint ) -> bool {
+                         if( error ) {
+                             CI_LOG_E( "Error Listening: " << error.message() << " val: " << error.value() << " endpoint: " << endpoint );
+                             return false;
+                         }
+                         else
+                             return true;
+                     });
+    
+    mBrentListener.listen(
                      []( asio::error_code error, protocol::endpoint endpoint ) -> bool {
                          if( error ) {
                              CI_LOG_E( "Error Listening: " << error.message() << " val: " << error.value() << " endpoint: " << endpoint );
@@ -1360,7 +1408,61 @@ void InteractiveTangoReadFromAndroidApp::handleOutputWekOSC(osc::Message message
 //    }
 //};
 
+void InteractiveTangoReadFromAndroidApp::handleBrentOSC(osc::Message message, float seconds)
+{
+    
+    setpriority(PRIO_PROCESS, 0, 1);
+    
+    //save all received messages here
+    if(mSaveOSC!=NULL)
+        mSaveOSC->add(message, seconds); //add this line to save the OSC
+        
+    std::string addr = message.getAddress();
+    
+    if( !addLiveDancers ) return;
+    
+    ShimmerData *shimmer = new ShimmerData;
 
+    std::string dID = "Brent";
+    int whichShimmer = 5;
+    
+    SensorData *sensor = getSensor(dID, whichShimmer);
+    if( addr.find( DATA_OSC_IPHONE_DATA ) != std::string::npos )
+    {
+        if( !addr.compare( DATA_OSC_IPHONE_DATA_ACCELX ) )
+        {
+            shimmer->setData( 2, message.getArgFloat(0) );
+        }
+        else if( !addr.compare( DATA_OSC_IPHONE_DATA_ACCELY ) )
+        {
+            shimmer->setData( 3, message.getArgFloat(0) );
+        }
+        else if( !addr.compare( DATA_OSC_IPHONE_DATA_ACCELZ ) )
+        {
+            shimmer->setData( 4, message.getArgFloat(0) );
+        }
+        else if( !addr.compare( DATA_OSC_IPHONE_DATA_GYRX ) )
+        {
+            shimmer->setData( 11, message.getArgFloat(0) );
+        }
+        else if( !addr.compare( DATA_OSC_IPHONE_DATA_GYRY ) )
+        {
+            shimmer->setData( 12, message.getArgFloat(0) );
+        }
+        else if( !addr.compare( DATA_OSC_IPHONE_DATA_GYRZ ) )
+        {
+            shimmer->setData( 13, message.getArgFloat(0) );
+        }
+    }
+
+    if( !addr.compare( OSC_SHIMMERDATA )  || !addr.compare( OSC_ANDROID_SENSOR_DATA )  || !addr.compare( OSC_M5STICK_DATA )
+       || ( addr.find( DATA_OSC_IPHONE_DATA) != std::string::npos ) )
+        sensor->addShimmer( shimmer );
+
+}
+//void handleDataOSCIPhone(osc::Message message, float seconds);
+
+//NOTE: 2025 -- This is where all the data messages are handled!!
 void InteractiveTangoReadFromAndroidApp::handleOSC(osc::Message message, float seconds)
 {
 //handles all the incoming OSC messages
@@ -1368,18 +1470,13 @@ void InteractiveTangoReadFromAndroidApp::handleOSC(osc::Message message, float s
     
     setpriority(PRIO_PROCESS, 0, 1);
     
-    bool firstTime  = true;
-
-//    while( mListener.hasWaitingMessages() ) {
-//        osc::Message message;
-//        mListener.getNextMessage( &message );
-    
-        //save all received messages here
-        if(mSaveOSC!=NULL)
-            mSaveOSC->add(message, seconds); //add this line to save the OSC
+    //boolean firstTime = true;
+        
+    //save all received messages here
+    if(mSaveOSC!=NULL)
+        mSaveOSC->add(message, seconds); //add this line to save the OSC
         
         std::string addr = message.getAddress();
-//    std::cout << message << std::endl;
     
         if( !addr.compare( ABLETON_SYNC ) )
         {
@@ -1412,26 +1509,80 @@ void InteractiveTangoReadFromAndroidApp::handleOSC(osc::Message message, float s
         {
             handleOutputWekOSC( message, seconds );
         }
-        else
+        else //if( ! addr.find( OSC_SHIMMERDATA ) )
         {
-            
-            if( firstTime )
-            {
-                firstTime = false;
-                //                std::cout << seconds << std::endl;
-            }
             
             //sometimes this gets phantom data -- this MUST be enabled.
             if( !addLiveDancers ) return;
             
             ShimmerData *shimmer = new ShimmerData;
-            std::string dID = message.getArgString(0) ;
-            int whichShimmer = message.getArgInt32(1);
-            shimmer->setData( 1, message.getArgFloat(2) ); //set timestamp from device
+            std::string dID;
+            int whichShimmer;
+            if( addr.find( DATA_OSC_IPHONE_DATA ) != std::string::npos )
+            {
+                dID = "Courtney";
+                whichShimmer = 5;
+            }
+            else
+            {
+                dID = message.getArgString(0) ;
+                whichShimmer = message.getArgInt32(1);
+            }
+            //shimmer->setData( 1, message.getArgFloat(2) ); //set timestamp from device
             shimmer->setData( 19, seconds); //set timestamp from this program
             
             SensorData *sensor = getSensor(dID, whichShimmer);
-            
+            if( addr.find( DATA_OSC_IPHONE_DATA ) != std::string::npos )
+            {
+                if( !addr.compare( DATA_OSC_IPHONE_DATA_ACCELX ) )
+                {
+                    shimmer->setData( 2, message.getArgFloat(0) );
+                    shimmer->setData( 3, NO_DATA );
+                    shimmer->setData( 4, NO_DATA );
+                   // std::cout << "x receive here: " << message.getArgFloat(0) << std::endl;
+                }
+                else
+                    if( !addr.compare( DATA_OSC_IPHONE_DATA_ACCELY ) )
+                {
+                    shimmer->setData( 3, message.getArgFloat(0) );
+                    shimmer->setData( 2, NO_DATA );
+                    shimmer->setData( 4, NO_DATA );
+//                    std::cout << "y receive here: " << message.getArgFloat(0) << std::endl;
+
+                }
+                else if( !addr.compare( DATA_OSC_IPHONE_DATA_ACCELZ ) )
+                {
+                    shimmer->setData( 4, message.getArgFloat(0) );
+                    shimmer->setData( 2, NO_DATA );
+                    shimmer->setData( 3, NO_DATA );
+                    // std::cout << "z receive here: " << message.getArgFloat(0) << std::endl;
+
+                }
+                else if( !addr.compare( DATA_OSC_IPHONE_DATA_GYRX ) )
+                {
+                    shimmer->setData( 11, message.getArgFloat(0) );
+                    
+                }
+                else if( !addr.compare( DATA_OSC_IPHONE_DATA_GYRY ) )
+                {
+                    shimmer->setData( 12, message.getArgFloat(0) );
+                }
+                else if( !addr.compare( DATA_OSC_IPHONE_DATA_GYRZ ) )
+                {
+                    shimmer->setData( 13, message.getArgFloat(0) );
+                }
+            }
+            if( !addr.compare( OSC_M5STICK_DATA ) )
+            {
+                for( int i=2; i<5; i++ ) //set accel values
+                {
+                    shimmer->setData( i, message.getArgFloat(i) );
+                }
+                for( int i=11; i<14; i++ ) //set gyro values
+                {
+                    shimmer->setData( i, message.getArgFloat(i-6) );
+                }
+            }
             if( !addr.compare( OSC_SHIMMERDATA ) )
             {
                 ci::vec4 quat;
@@ -1501,8 +1652,11 @@ void InteractiveTangoReadFromAndroidApp::handleOSC(osc::Message message, float s
             }
             
             
-            if( !addr.compare( OSC_SHIMMERDATA )  || !addr.compare( OSC_ANDROID_SENSOR_DATA )  )
+            if( !addr.compare( OSC_SHIMMERDATA )  || !addr.compare( OSC_ANDROID_SENSOR_DATA )  || !addr.compare( OSC_M5STICK_DATA )
+               || ( addr.find( DATA_OSC_IPHONE_DATA) != std::string::npos ) )
+            {
                 sensor->addShimmer( shimmer );
+            }
             
         }
 //    }
