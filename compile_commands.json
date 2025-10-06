@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "/Users/courtney/Programs/cinder_0.9.2_mac/InteractiveTangoMilongaArm64",
+    "command": "clang++ -I/Users/courtney/Programs/cinder_9.2_Arm64/Cinder/include -I/opt/homebrew/opt/itpp/include -I/opt/homebrew/opt/boost/include -I./include -I./blocks/OSC/src -I./blocks/OSC/src/cinder -std=c++17 -DDEBUG=1 -DTARGET_OS_MAC=1 -c src/InteractiveTangoMilongaArm64App.cpp",
+    "file": "src/InteractiveTangoMilongaArm64App.cpp"
+  }
+]

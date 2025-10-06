@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
+		006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
+		0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0091D8F80E81B9330029341E /* OpenGL.framework */; };
+		00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784AF0FF439BC000DE1D7 /* Accelerate.framework */; };
+		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
+		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
+		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
+		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		070CCA744C17469FB9D7E413 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8651746FE23B4AE683606D75 /* CinderApp.icns */; };
+		3829675A7B854E5BBC2FAAED /* InteractiveTangoMilongaArm64App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174FEC0E12034170A98E1F37 /* InteractiveTangoMilongaArm64App.cpp */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		78458279234946B086EBF99C /* Osc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE84162B7093471992FEB25E /* Osc.cpp */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		F1C332FE2E7B53B00051547C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C332FD2E7B53B00051547C /* libz.tbd */; };
+		F1C3331A2E7B57430051547C /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1C333032E7B57430051547C /* Binasc.cpp */; };
+		F1C3331B2E7B57430051547C /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1C3330D2E7B57430051547C /* MidiEventList.cpp */; };
+		F1C3331C2E7B57430051547C /* nrutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1C333122E7B57430051547C /* nrutil.cpp */; };
+		F1C333232E7B58BC0051547C /* MidiMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1C333222E7B58BC0051547C /* MidiMessage.cpp */; };
+		F1C3334B2E7B660C0051547C /* midi_output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1C3334A2E7B660C0051547C /* midi_output.cpp */; };
+		F1F0AFE12E7BB5E100FB8337 /* libitpp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F0AFE02E7BB5E100FB8337 /* libitpp.dylib */; };
+		F1F0AFE52E7BCA1700FB8337 /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1F0AFE42E7BCA1700FB8337 /* MidiEvent.cpp */; };
+		F1F0AFE72E7BCAAA00FB8337 /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1F0AFE62E7BCAAA00FB8337 /* RtMidi.cpp */; };
+		F1F0AFE92E7BCB2B00FB8337 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F0AFE82E7BCB2B00FB8337 /* CoreMIDI.framework */; };
+		F1F0AFEB2E7BCCD900FB8337 /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1F0AFEA2E7BCCD900FB8337 /* MidiFile.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		006D720219952D00008149E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		006D720319952D00008149E2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		174FEC0E12034170A98E1F37 /* InteractiveTangoMilongaArm64App.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = InteractiveTangoMilongaArm64App.cpp; path = ../src/InteractiveTangoMilongaArm64App.cpp; sourceTree = "<group>"; };
+		28D59E3FCDB1401C9D098ACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		44DA42B542184746A7368881 /* InteractiveTangoMilongaArm64_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = InteractiveTangoMilongaArm64_Prefix.pch; sourceTree = "<group>"; };
+		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		8651746FE23B4AE683606D75 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* InteractiveTangoMilongaArm64.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InteractiveTangoMilongaArm64.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4CE95C4D3A74261BC85D667 /* Osc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Osc.h; path = ../blocks/OSC/src/cinder/osc/Osc.h; sourceTree = "<group>"; };
+		AE5617A0ADC9498ABC7F894D /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		AE84162B7093471992FEB25E /* Osc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = Osc.cpp; path = ../blocks/OSC/src/cinder/osc/Osc.cpp; sourceTree = "<group>"; };
+		F1C332FD2E7B53B00051547C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		F1C333012E7B57430051547C /* BeatTiming.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatTiming.h; sourceTree = "<group>"; };
+		F1C333022E7B57430051547C /* Binasc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
+		F1C333032E7B57430051547C /* Binasc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Binasc.cpp; sourceTree = "<group>"; };
+		F1C333042E7B57430051547C /* Containers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Containers.h; sourceTree = "<group>"; };
+		F1C333052E7B57430051547C /* Dancers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dancers.h; sourceTree = "<group>"; };
+		F1C333062E7B57430051547C /* fasper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fasper.h; sourceTree = "<group>"; };
+		F1C333082E7B57430051547C /* Instruments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Instruments.h; sourceTree = "<group>"; };
+		F1C333092E7B57430051547C /* InteractiveTangoOSCMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveTangoOSCMessages.h; sourceTree = "<group>"; };
+		F1C3330A2E7B57430051547C /* InteractiveTangoSignalAnalysis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveTangoSignalAnalysis.h; sourceTree = "<group>"; };
+		F1C3330B2E7B57430051547C /* InteractiveTangoStepDetection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveTangoStepDetection.h; sourceTree = "<group>"; };
+		F1C3330C2E7B57430051547C /* MappingSchemaEventInContinuousOut.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MappingSchemaEventInContinuousOut.h; sourceTree = "<group>"; };
+		F1C3330D2E7B57430051547C /* MidiEventList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEventList.cpp; sourceTree = "<group>"; };
+		F1C3330E2E7B57430051547C /* MocapCam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MocapCam.h; sourceTree = "<group>"; };
+		F1C3330F2E7B57430051547C /* MotionAnalysisParameterRanges.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotionAnalysisParameterRanges.h; sourceTree = "<group>"; };
+		F1C333102E7B57430051547C /* MusicPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicPlayer.h; sourceTree = "<group>"; };
+		F1C333112E7B57430051547C /* nrutil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nrutil.h; sourceTree = "<group>"; };
+		F1C333122E7B57430051547C /* nrutil.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = nrutil.cpp; sourceTree = "<group>"; };
+		F1C333132E7B57430051547C /* PerceptualMappingScheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerceptualMappingScheme.h; sourceTree = "<group>"; };
+		F1C333142E7B57430051547C /* Resources copy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Resources copy.h"; sourceTree = "<group>"; };
+		F1C333152E7B57430051547C /* SendOSCUGENs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendOSCUGENs.h; sourceTree = "<group>"; };
+		F1C333162E7B57430051547C /* SensorData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorData.h; sourceTree = "<group>"; };
+		F1C333172E7B57430051547C /* SoundFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundFile.h; sourceTree = "<group>"; };
+		F1C333182E7B57430051547C /* SoundFileNDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundFileNDB.h; sourceTree = "<group>"; };
+		F1C333192E7B57430051547C /* TangoFragmentsSectionALoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TangoFragmentsSectionALoader.h; sourceTree = "<group>"; };
+		F1C3331D2E7B580E0051547C /* MIDIUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDIUtility.h; sourceTree = "<group>"; };
+		F1C3331E2E7B58510051547C /* MidiEventList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
+		F1C3331F2E7B58BC0051547C /* MidiEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MidiEvent.h; sourceTree = "<group>"; };
+		F1C333202E7B58BC0051547C /* MidiFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MidiFile.h; sourceTree = "<group>"; };
+		F1C333212E7B58BC0051547C /* MidiMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
+		F1C333222E7B58BC0051547C /* MidiMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MidiMessage.cpp; sourceTree = "<group>"; };
+		F1C333242E7B58E50051547C /* midi_event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = midi_event.h; sourceTree = "<group>"; };
+		F1C333252E7B58E50051547C /* midi_file_reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = midi_file_reader.h; sourceTree = "<group>"; };
+		F1C333262E7B58E50051547C /* midi_file_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = midi_file_reader.cpp; sourceTree = "<group>"; };
+		F1C333272E7B58E50051547C /* midi_file_writer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = midi_file_writer.h; sourceTree = "<group>"; };
+		F1C333282E7B58E50051547C /* midi_file_writer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = midi_file_writer.cpp; sourceTree = "<group>"; };
+		F1C333292E7B58E50051547C /* midi_input.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = midi_input.h; sourceTree = "<group>"; };
+		F1C3332A2E7B58E50051547C /* midi_input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = midi_input.cpp; sourceTree = "<group>"; };
+		F1C3332B2E7B58E50051547C /* midi_message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = midi_message.h; sourceTree = "<group>"; };
+		F1C3332C2E7B58E50051547C /* midi_output.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = midi_output.h; sourceTree = "<group>"; };
+		F1C3332D2E7B58E50051547C /* midi_output.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = midi_output.cpp; sourceTree = "<group>"; };
+		F1C3332E2E7B58E50051547C /* midi_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = midi_utils.h; sourceTree = "<group>"; };
+		F1C3332F2E7B58E50051547C /* midi_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = midi_utils.cpp; sourceTree = "<group>"; };
+		F1C333312E7B58E50051547C /* MidiEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEvent.cpp; sourceTree = "<group>"; };
+		F1C333342E7B58E50051547C /* MidiFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
+		F1C333352E7B59470051547C /* modernmidi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modernmidi.h; sourceTree = "<group>"; };
+		F1C333362E7B597D0051547C /* MotionAnalysisOuput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotionAnalysisOuput.h; sourceTree = "<group>"; };
+		F1C333382E7B597D0051547C /* MusicPlayerNDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicPlayerNDB.h; sourceTree = "<group>"; };
+		F1C333392E7B597D0051547C /* Options.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Options.cpp; sourceTree = "<group>"; };
+		F1C3333A2E7B597D0051547C /* PerceptualSchemas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerceptualSchemas.h; sourceTree = "<group>"; };
+		F1C3333B2E7B597D0051547C /* port_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = port_manager.h; sourceTree = "<group>"; };
+		F1C3333C2E7B597D0051547C /* port_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = port_manager.cpp; sourceTree = "<group>"; };
+		F1C3333D2E7B597D0051547C /* ReadCSV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadCSV.h; sourceTree = "<group>"; };
+		F1C3333E2E7B597D0051547C /* RtMidi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RtMidi.h; sourceTree = "<group>"; };
+		F1C3333F2E7B597D0051547C /* RtMidi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RtMidi.cpp; sourceTree = "<group>"; };
+		F1C333402E7B597D0051547C /* rtmidi_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rtmidi_c.h; sourceTree = "<group>"; };
+		F1C333412E7B597D0051547C /* rtmidi_c.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rtmidi_c.cpp; sourceTree = "<group>"; };
+		F1C333422E7B597D0051547C /* SaveOSC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveOSC.h; sourceTree = "<group>"; };
+		F1C333432E7B597D0051547C /* SendOSCUGENs 2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SendOSCUGENs 2.h"; sourceTree = "<group>"; };
+		F1C333442E7B597D0051547C /* ShimmerData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShimmerData.h; sourceTree = "<group>"; };
+		F1C333452E7B597D0051547C /* ShimmerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShimmerWrapper.h; sourceTree = "<group>"; };
+		F1C333462E7B597D0051547C /* VisualizeShimmer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisualizeShimmer.h; sourceTree = "<group>"; };
+		F1C333472E7B59CE0051547C /* fftw3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fftw3.h; sourceTree = "<group>"; };
+		F1C333492E7B62C90051547C /* DancersNDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DancersNDB.h; sourceTree = "<group>"; };
+		F1C3334A2E7B660C0051547C /* midi_output.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = midi_output.cpp; sourceTree = "<group>"; };
+		F1F0AFE02E7BB5E100FB8337 /* libitpp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libitpp.dylib; sourceTree = "<group>"; };
+		F1F0AFE42E7BCA1700FB8337 /* MidiEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEvent.cpp; sourceTree = "<group>"; };
+		F1F0AFE62E7BCAAA00FB8337 /* RtMidi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RtMidi.cpp; sourceTree = "<group>"; };
+		F1F0AFE82E7BCB2B00FB8337 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		F1F0AFEA2E7BCCD900FB8337 /* MidiFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1F0AFE92E7BCB2B00FB8337 /* CoreMIDI.framework in Frameworks */,
+				F1F0AFE12E7BB5E100FB8337 /* libitpp.dylib in Frameworks */,
+				F1C332FE2E7B53B00051547C /* libz.tbd in Frameworks */,
+				006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */,
+				006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
+				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
+				00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */,
+				00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */,
+				00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */,
+				00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */,
+				00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */,
+				00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				8BAEF26A1E6D440DBE74ACB6 /* OSC */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F1F0AFEA2E7BCCD900FB8337 /* MidiFile.cpp */,
+				F1F0AFE62E7BCAAA00FB8337 /* RtMidi.cpp */,
+				F1F0AFE42E7BCA1700FB8337 /* MidiEvent.cpp */,
+				F1C3334A2E7B660C0051547C /* midi_output.cpp */,
+				174FEC0E12034170A98E1F37 /* InteractiveTangoMilongaArm64App.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006D720219952D00008149E2 /* AVFoundation.framework */,
+				006D720319952D00008149E2 /* CoreMedia.framework */,
+				00B784AF0FF439BC000DE1D7 /* Accelerate.framework */,
+				00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */,
+				00B784B10FF439BC000DE1D7 /* AudioUnit.framework */,
+				00B784B20FF439BC000DE1D7 /* CoreAudio.framework */,
+				5323E6B10EAFCA74003A9687 /* CoreVideo.framework */,
+				0091D8F80E81B9330029341E /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				00B995581B128DF400A5C623 /* IOKit.framework */,
+				00B995591B128DF400A5C623 /* IOSurface.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* InteractiveTangoMilongaArm64.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* InteractiveTangoMilongaArm64 */ = {
+			isa = PBXGroup;
+			children = (
+				01B97315FEAEA392516A2CEA /* Blocks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = InteractiveTangoMilongaArm64;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				F1C333492E7B62C90051547C /* DancersNDB.h */,
+				F1C333472E7B59CE0051547C /* fftw3.h */,
+				F1C333362E7B597D0051547C /* MotionAnalysisOuput.h */,
+				F1C333382E7B597D0051547C /* MusicPlayerNDB.h */,
+				F1C333392E7B597D0051547C /* Options.cpp */,
+				F1C3333A2E7B597D0051547C /* PerceptualSchemas.h */,
+				F1C3333B2E7B597D0051547C /* port_manager.h */,
+				F1C3333C2E7B597D0051547C /* port_manager.cpp */,
+				F1C3333D2E7B597D0051547C /* ReadCSV.h */,
+				F1C3333E2E7B597D0051547C /* RtMidi.h */,
+				F1C3333F2E7B597D0051547C /* RtMidi.cpp */,
+				F1C333402E7B597D0051547C /* rtmidi_c.h */,
+				F1C333412E7B597D0051547C /* rtmidi_c.cpp */,
+				F1C333422E7B597D0051547C /* SaveOSC.h */,
+				F1C333432E7B597D0051547C /* SendOSCUGENs 2.h */,
+				F1C333442E7B597D0051547C /* ShimmerData.h */,
+				F1C333452E7B597D0051547C /* ShimmerWrapper.h */,
+				F1C333462E7B597D0051547C /* VisualizeShimmer.h */,
+				F1C333352E7B59470051547C /* modernmidi.h */,
+				F1C3331F2E7B58BC0051547C /* MidiEvent.h */,
+				F1C333202E7B58BC0051547C /* MidiFile.h */,
+				F1C333212E7B58BC0051547C /* MidiMessage.h */,
+				F1C333222E7B58BC0051547C /* MidiMessage.cpp */,
+				F1C3331E2E7B58510051547C /* MidiEventList.h */,
+				F1C3331D2E7B580E0051547C /* MIDIUtility.h */,
+				F1C333012E7B57430051547C /* BeatTiming.h */,
+				F1C333022E7B57430051547C /* Binasc.h */,
+				F1C333032E7B57430051547C /* Binasc.cpp */,
+				F1C333042E7B57430051547C /* Containers.h */,
+				F1C333052E7B57430051547C /* Dancers.h */,
+				F1C333062E7B57430051547C /* fasper.h */,
+				F1C333082E7B57430051547C /* Instruments.h */,
+				F1C333092E7B57430051547C /* InteractiveTangoOSCMessages.h */,
+				F1C3330A2E7B57430051547C /* InteractiveTangoSignalAnalysis.h */,
+				F1C3330B2E7B57430051547C /* InteractiveTangoStepDetection.h */,
+				F1C3330C2E7B57430051547C /* MappingSchemaEventInContinuousOut.h */,
+				F1C3330D2E7B57430051547C /* MidiEventList.cpp */,
+				F1C3330E2E7B57430051547C /* MocapCam.h */,
+				F1C3330F2E7B57430051547C /* MotionAnalysisParameterRanges.h */,
+				F1C333102E7B57430051547C /* MusicPlayer.h */,
+				F1C333112E7B57430051547C /* nrutil.h */,
+				F1C333122E7B57430051547C /* nrutil.cpp */,
+				F1C333132E7B57430051547C /* PerceptualMappingScheme.h */,
+				F1C333142E7B57430051547C /* Resources copy.h */,
+				F1C333152E7B57430051547C /* SendOSCUGENs.h */,
+				F1C333162E7B57430051547C /* SensorData.h */,
+				F1C333172E7B57430051547C /* SoundFile.h */,
+				F1C333182E7B57430051547C /* SoundFileNDB.h */,
+				F1C333192E7B57430051547C /* TangoFragmentsSectionALoader.h */,
+				AE5617A0ADC9498ABC7F894D /* Resources.h */,
+				44DA42B542184746A7368881 /* InteractiveTangoMilongaArm64_Prefix.pch */,
+				F1C333242E7B58E50051547C /* midi_event.h */,
+				F1C333252E7B58E50051547C /* midi_file_reader.h */,
+				F1C333262E7B58E50051547C /* midi_file_reader.cpp */,
+				F1C333272E7B58E50051547C /* midi_file_writer.h */,
+				F1C333282E7B58E50051547C /* midi_file_writer.cpp */,
+				F1C333292E7B58E50051547C /* midi_input.h */,
+				F1C3332A2E7B58E50051547C /* midi_input.cpp */,
+				F1C3332B2E7B58E50051547C /* midi_message.h */,
+				F1C3332C2E7B58E50051547C /* midi_output.h */,
+				F1C3332D2E7B58E50051547C /* midi_output.cpp */,
+				F1C3332E2E7B58E50051547C /* midi_utils.h */,
+				F1C3332F2E7B58E50051547C /* midi_utils.cpp */,
+				F1C333312E7B58E50051547C /* MidiEvent.cpp */,
+				F1C333342E7B58E50051547C /* MidiFile.cpp */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8651746FE23B4AE683606D75 /* CinderApp.icns */,
+				28D59E3FCDB1401C9D098ACD /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1F0AFE82E7BCB2B00FB8337 /* CoreMIDI.framework */,
+				F1F0AFE02E7BB5E100FB8337 /* libitpp.dylib */,
+				F1C332FD2E7B53B00051547C /* libz.tbd */,
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59C03A545E5E4112ADC2C1D3 /* cinder */ = {
+			isa = PBXGroup;
+			children = (
+				6AF5B4D86A6B402191F4C982 /* osc */,
+			);
+			name = cinder;
+			sourceTree = "<group>";
+		};
+		6AF5B4D86A6B402191F4C982 /* osc */ = {
+			isa = PBXGroup;
+			children = (
+				AE84162B7093471992FEB25E /* Osc.cpp */,
+				A4CE95C4D3A74261BC85D667 /* Osc.h */,
+			);
+			name = osc;
+			sourceTree = "<group>";
+		};
+		8BAEF26A1E6D440DBE74ACB6 /* OSC */ = {
+			isa = PBXGroup;
+			children = (
+				EEC042031DA547698FDB070D /* src */,
+			);
+			name = OSC;
+			sourceTree = "<group>";
+		};
+		EEC042031DA547698FDB070D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				59C03A545E5E4112ADC2C1D3 /* cinder */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* InteractiveTangoMilongaArm64 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "InteractiveTangoMilongaArm64" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InteractiveTangoMilongaArm64;
+			productInstallPath = "$(HOME)/Applications";
+			productName = InteractiveTangoMilongaArm64;
+			productReference = 8D1107320486CEB800E47090 /* InteractiveTangoMilongaArm64.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "InteractiveTangoMilongaArm64" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* InteractiveTangoMilongaArm64 */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* InteractiveTangoMilongaArm64 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				070CCA744C17469FB9D7E413 /* CinderApp.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1C3331A2E7B57430051547C /* Binasc.cpp in Sources */,
+				F1C3331B2E7B57430051547C /* MidiEventList.cpp in Sources */,
+				F1C3331C2E7B57430051547C /* nrutil.cpp in Sources */,
+				3829675A7B854E5BBC2FAAED /* InteractiveTangoMilongaArm64App.cpp in Sources */,
+				F1F0AFE72E7BCAAA00FB8337 /* RtMidi.cpp in Sources */,
+				F1F0AFE52E7BCA1700FB8337 /* MidiEvent.cpp in Sources */,
+				F1C333232E7B58BC0051547C /* MidiMessage.cpp in Sources */,
+				78458279234946B086EBF99C /* Osc.cpp in Sources */,
+				F1F0AFEB2E7BCCD900FB8337 /* MidiFile.cpp in Sources */,
+				F1C3334B2E7B660C0051547C /* midi_output.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = InteractiveTangoMilongaArm64_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"\"$(CINDER_PATH)/lib/macosx/$(CONFIGURATION)/libcinder.a\"",
+					"\"-L/opt/homebrew/opt/itpp/lib -litpp\"",
+					"\"-L/opt/homebrew/opt/lib -lboost_system -lboost_filesystem\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = InteractiveTangoMilongaArm64;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = InteractiveTangoMilongaArm64_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"\"$(CINDER_PATH)/lib/macosx/$(CONFIGURATION)/libcinder.a\"",
+					"\"-L/opt/homebrew/opt/itpp/lib -litpp\"",
+					"\"-L/opt/homebrew/opt/boost/lib -lboost_system -lboost_filesystem\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = InteractiveTangoMilongaArm64;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = ../../../cinder_9.2_Arm64/Cinder;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(CINDER_PATH)/include\"",
+					/opt/homebrew/opt/itpp/include,
+					/opt/homebrew/opt/boost/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/homebrew/opt/itpp/lib,
+					/opt/homebrew/opt/boost/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../blocks/OSC/src";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = ../../../cinder_9.2_Arm64/Cinder;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(CINDER_PATH)/include\"",
+					/opt/homebrew/opt/itpp/include,
+					/opt/homebrew/opt/boost/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/homebrew/opt/itpp/lib,
+					/opt/homebrew/opt/boost/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../blocks/OSC/src";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "InteractiveTangoMilongaArm64" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "InteractiveTangoMilongaArm64" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

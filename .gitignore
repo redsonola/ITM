@@ -1,0 +1,21 @@
+# VS Code/Cursor settings
+.vscode/
+
+# Xcode build artifacts
+xcode/build/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# macOS
+.DS_Store
+
+
+
+
+
+
+
+
+
+
+

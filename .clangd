@@ -1,0 +1,18 @@
+CompileFlags:
+  Add:
+    - -I./include
+    - -I./xcode
+    - -I./blocks/OSC/src
+    - -I./blocks/OSC/src/cinder
+    - -I./blocks/OSC/src/cinder/osc
+    - -I/Users/courtney/Programs/cinder_9.2_Arm64/Cinder/include
+    - -I/opt/homebrew/opt/itpp/include
+    - -I/opt/homebrew/opt/boost/include
+    - -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1
+    - -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+    - -std=c++17
+    - -DDEBUG=1
+    - -DTARGET_OS_MAC=1
+  Remove:
+    - -W*
+
